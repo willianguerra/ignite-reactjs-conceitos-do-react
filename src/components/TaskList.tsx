@@ -21,7 +21,8 @@ export function TaskList() {
       return;
     }
 
-    setTasks([...tasks, 
+    setTasks([
+      ...tasks,
       {
         id: Math.random(),
         title: newTaskTitle,
@@ -31,17 +32,17 @@ export function TaskList() {
   }
 
   function handleToggleTaskCompletion(id: number) {
-    tasks.map((task) => {
-      if (task.id === id) {
-        setTasks([
-          {
-            id: task.id,
-            title: task.title,
-            isComplete: task.isComplete ? false : true,
-          },
-        ]);
-      }
-    });
+    const newTask = tasks.map((task) =>
+      task.id === id
+        ? {
+            ...task,
+            isComplete: !task.isComplete,
+          }
+        : task
+    );
+
+    setTasks(newTask);
+
     // Altere entre `true` ou `false` o campo `isComplete` de uma task com dado ID
   }
 
